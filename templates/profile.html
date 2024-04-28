@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-section">
+    <div class="d-flex align-items-center justify-content-center">
+        <img class="rounded-circle account-img" src="{{ user.profile_pic.url }}">
+    </div>
+    <div class="media-body text-center">
+        <h2 class="account-heading">USN: {{ user.usn }}</h2>
+        <p class="">Name: {{ user.name }}</p>
+        <p class="">Email: {{ user.email }}</p>
+        <p class="">Phone Number: {{ user.phone_number }}</p>
+        <p class="">DOB: {{ user.dob }}</p>
+        <p class="">Gender:
+            {% if user.gender == 'M' %}
+                Male
+            {% elif user.gender == 'F' %}
+                Female
+            {% else %}
+                Others
+            {% endif %}
+        </p>
+    </div>
+    {% if user == request.user %}
+    <div class="content-section">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Update Profile Pic</legend>
+                <div class="form-group">
+                    <label for="profile_pic">Choose Profile Picture:</label>
+                    <input type="file" class="form-control-file" id="profile_pic" name="profile_pic">
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+    {% for post in posts %}
+    <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ post.author.profile_pic.url }}">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="">{{ post.author }}</a>
+                <small class="text-muted">{{ post.date_posted|date:"F j, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'post_details' post_slug=post.slug usn=post.author.usn %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

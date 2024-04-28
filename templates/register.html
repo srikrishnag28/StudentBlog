@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid h-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-md-8">
+            <div class="content-section">
+                <form method="post">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Register</legend>
+                        <div class="form-row">
+                            <div class="col form-group">
+                                 <label for="id_usn">USN:</label>
+                            <input type="text" class="form-control" id="id_usn" name="usn" placeholder="USN">
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label for="id_name">Name:</label>
+                            <input type="text" class="form-control" id="id_name" name="name" placeholder="Name">
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row end.// -->
+                        <div class="form-group">
+                            <label for="id_email">Email:</label>
+                            <input type="email" class="form-control" id="id_email" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label for="id_phone_number">Phone Number:</label>
+                                <input type="tel" class="form-control" id="id_phone_number" name="phone_number"
+                                       placeholder="Phone Number">
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label for="id_gender">Gender:</label>
+                                <select class="form-control" id="id_gender" name="gender">
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                    <option value="O">Other</option>
+                                </select>
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label for="id_dob">Date of Birth:</label>
+                                <input type="date" class="form-control" id="id_dob" name="dob">
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row end.// -->
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="Password" name="password">
+                            </div> <!-- form-group end.// -->
+                            <div class="col form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="Confirm assword"
+                                       name="confirm_password">
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row end.// -->
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-danger" type="submit">Register</button>
+                    </div>
+                </form>
+                <div class="border-top pt-3 d-flex justify-content-between align-items-center">
+                    <small class="text-muted">
+                        Already have an account? <a class="ml-2" href="{% url 'login' %}">Log In</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

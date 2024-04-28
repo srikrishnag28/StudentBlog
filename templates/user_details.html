@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content-section">
+        {% if posts %}
+        <div class="d-flex align-items-center justify-content-center">
+            <img class="rounded-circle account-img" src="{{ posts.0.author.profile.image.url }}">
+            <div class="media-boby">
+                <h2 class="account-heading">{{ posts.0.author }}</h2>
+                <p class="text-secondary">{{ posts.0.author.email }}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% for post in posts %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small class="text-muted">{{ post.date_posted|date:"F j, Y" }}</small>
+                </div>
+                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content }}</p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+{% endblock %}
